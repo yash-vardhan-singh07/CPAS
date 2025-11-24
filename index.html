@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your Rewards</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Phosphor Icons for emojis/icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/css/icons.css">
+    
+    <style>
+        /* Custom Colors based on user's provided palette */
+        :root {
+            --bg-dark: rgba(0, 0, 0);
+            --text-light: #FEFEFE;
+            --block-bg: #1F2125;
+            --link-bg: #c7ffb7;
+            --link-text: #088a74;
+            --header-text: #ffffff;
+            --purple-bubble: #6d28d9; 
+            --neon-green: #17e84a; /* Specific green for glow */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        .h123{
+            height: 165px;
+        }
+
+.reward-button {
+    background: #c7ffb7;
+    color: #088a74;
+    transition: all 0.6s ease;
+    border-radius: 9999px; /* Full round corners for all buttons */
+}
+
+/* Only Amazon button dances */
+.amazon-dance {
+    animation: danceZoom 3.5s infinite ease-in-out;
+    transform-origin: center;
+}
+@media screen and (min-width: 768px) {
+            .chat-carousel-container {
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 1rem; /* Space for shadow */
+        }
+
+        .chat-slide {
+            flex: 0 0 100%; /* Make each slide take up the full width of the container viewport */
+            scroll-snap-align: start; /* Snap precisely to the start of the slide */
+            width: 100%;
+            aspect-ratio: 4/9; /* Sets height relative to width for responsive image container */
+            background-color: var(--bg-dark); 
+            border: 1px solid var(--block-bg);
+            box-shadow: 0 0 25px rgba(31, 33, 37, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-slide img {
+            width: 100%;
+            height: 100%;
+            /* FIX: Use cover to make the image fill the entire box */
+            object-fit: cover; 
+            border-radius: 0.75rem; /* Match the rounded-2xl on the slide container */
+        }
+}
+/* Smooth, gentle dance (zoom + rotate + hop) */
+@keyframes danceZoom {
+    0%, 70%, 100% {
+        transform: scale(1) rotate(0deg) translateY(0);
+    }
+
+    75% {
+        transform: scale(1.1) rotate(-3deg) translateY(-6px);
+    }
+
+    80% {
+        transform: scale(1.13) rotate(3deg) translateY(-8px);
+    }
+
+    85% {
+        transform: scale(1.1) rotate(-2deg) translateY(-5px);
+    }
+
+    90% {
+        transform: scale(1.08) rotate(2deg) translateY(-6px);
+    }
+
+    95% {
+        transform: scale(1) rotate(0deg) translateY(0);
+    }
+}
+
+
+        .reward-button:hover {
+            box-shadow: inset 0 0 15px rgba(8, 138, 116, 0.6), 
+                        0 0 30px 0 rgba(199, 255, 183, 0.8);
+        }
+
+        .reward-button:active {
+            transform: scale(0.97);
+            box-shadow: inset 0 0 20px rgba(8, 138, 116, 0.8);
+        }
+
+        .block-card {
+            background-color: var(--block-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Carousel/Chat Styling */
+.chat-carousel-container {
+     overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    display: flex;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    width: 100vw;
+
+    position: relative;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;     /* Hide scrollbar for Firefox */
+    height: 650px; /* Fixed height for desktop */
+    
+}
+.chat-carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+        .chat-slide {
+            flex: 0 0 100%; /* Make each slide take up the full width of the container viewport */
+            scroll-snap-align: start; /* Snap precisely to the start of the slide */
+            width: 100%;
+            aspect-ratio: 3/4; /* Sets height relative to width for responsive image container */
+            background-color: var(--bg-dark); 
+            border: 1px solid var(--block-bg);
+            box-shadow: 0 0 25px rgba(31, 33, 37, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;  /* Forces one-by-one sliding */
+    min-width: 100%;
+        }
+
+        .chat-slide img {
+            width: 100%;
+            height: 100%;
+            /* FIX: Use cover to make the image fill the entire box */
+            object-fit: contain; 
+            border-radius: 0.75rem; /* Match the rounded-2xl on the slide container */
+        }
+        @media screen and (max-width: 768px) {
+    .chat-carousel-container {
+        height: 625px; /* Even smaller height for mobile */
+    }
+    
+    .chat-slide {
+        aspect-ratio: 2/3; /* More compact ratio for mobile */
+    }
+}
+
+        /* Enhanced Dollar Graphic Styling */
+        .dollar-icon-container {
+            width: 160px;
+            height: 160px;
+            /* margin: 0 auto; */
+            border-radius: 50%;
+            position: relative;
+            background-color: #0c2f10; /* Dark inner color for the "coin" */
+            border: 4px solid var(--neon-green);
+            /* Initial glow for when flicker is off / max intensity */
+            box-shadow: 0 0 10px 2px var(--neon-green), 0 0 20px 5px var(--neon-green);
+            overflow: hidden; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            /* Apply the new aggressive flicker animation */
+            animation: neon-flicker 1.5s infinite alternate;
+
+
+        }
+        
+        
+        .dollar-icon-container img {
+            /* Ensure the image/content is visible */
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            /* Added filter to give the image content a subtle glow too */
+
+            /* UPDATED: Increased shadow spread and intensity */
+            filter: drop-shadow(0 0 8px var(--neon-green)) 
+                    drop-shadow(0 0 15px rgba(255, 255, 255, 0.7)); 
+        }
+
+        /* NEW Glitch/Flicker keyframes: rapid and harsh changes in opacity and shadow intensity */
+        @keyframes neon-flicker {
+            /* Full intensity */
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 10px 2px var(--neon-green), 0 0 25px 8px var(--neon-green);
+            }
+            /* Flicker 1: Dim/off */
+            20%, 24%, 55% {
+                opacity: 0.6;
+                box-shadow: 0 0 3px 1px var(--neon-green);
+            }
+            /* Flicker 2: Max intensity flash */
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 20px 5px #fff, 0 0 40px 15px var(--neon-green);
+            }
+        }
+        .mb6 {
+            margin-bottom: -3.0rem;
+            margin-right: 30px;
+        }
+        .a4545{
+                height: 58px;
+           margin-left: 40px;
+           object-fit: contain; 
+           margin-right: 4px;
+        }
+        /* List item separator for How to Claim section */
+        .claim-list li:not(:last-child) {
+            /* Reduced spacing between list items */
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .claim-list li p {
+            font-weight: 500; /* Make the description stand out a bit more */
+        }
+        
+        /* NEW: Style for the list numbers */
+        .claim-list-number {
+            font-size: 1rem; /* Equivalent to Tailwind text-base, matching content text size */
+            font-weight: normal; /* Normal font weight (less bold) */
+            margin-right: 0.75rem; /* Reduced margin for spacing */
+        }
+        .p5{
+            height: 75px;
+        }
+        .textxl{
+            font-size: 15px;
+        }
+        .textsm{
+            font-size: 14px;
+        }
+        .w32{
+            width: 100%;
+            border: none;
+        }
+        .w3{
+            width: 6px;
+        }
+        .h3{
+            height: 6px;
+        }
+        /* Add inside the <style> tag, before the closing tag */
+
+.dollar-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.dollar-particle {
+    position: absolute;
+    font-size: 12px;
+    color: var(--neon-green);
+    opacity: 0;
+    animation: particleFloat 1.5s ease-out forwards;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(
+            calc(-50% + ${Math.random() * 100 - 50}px),
+            calc(-50% + ${Math.random() * 100 - 50}px)
+        ) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Update the existing dollar-icon-container animation */
+.dollar-icon-container {
+    /* ...existing properties... */
+    animation: neon-flicker 1.5s infinite alternate, wiggleShred 3.5s infinite ease-in-out;
+}
+
+@keyframes wiggleShred {
+    0%, 70%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    75% {
+        transform: scale(1.1) rotate(-5deg);
+    }
+    80% {
+        transform: scale(1.15) rotate(5deg);
+    }
+    85% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+    90% {
+        transform: scale(1.05) rotate(3deg);
+    }
+}
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div id="app" class="max-w-4xl mx-auto">
+
+        <!-- Header and Reward Graphic Section -->
+        <header class="text-center mb-12 pt-6">
+            <div class="relative inline-block mb6">
+                
+                <!-- Enhanced Dollar Graphic Container -->
+                    <!-- Image is placed inside the container for the neon effect -->
+                    <img src="dp beacons111.png" height="70%" width="70%"
+                         alt="Reward Graphic" 
+                         class="w-full h123 object-contain"
+                         onerror="this.onerror=null;this.src='https://placehold.co/160x160/0c2f10/17e84a?text=$';">
+
+
+            </div>
+        </header>
+
+        <!-- Reward Survey Section -->
+<section class="mb-12 text-center">
+<section class="px-6 py-6 text-center"><h1 class="text-[26px] font-bold mb-2 leading-tight">✨ Reward Survey ✨</h1><p class="text-base font-medium">💸⬇ Choose Your Rewards ⬇💸</p></section>
+
+    <div class="space-y-4 text-center items-center">
+        <!-- Amazon Button (Dancing) -->
+        <a
+            href="https://trkio.org/aff_c?offer_id=80&aff_id=161640"
+            class="reward-button amazon-dance flex items-center p5 rounded-full max-w-sm mx-auto shadow-lg hover:shadow-2xl"
+        >
+
+                <img class="a4545 rounded-full" src="amazon.jpg" alt="">
+
+            <div>
+                
+                <p class="font-extrabold textxl">$750 Amazon 🎁</p>
+                <p class="textsm opacity-90 font-medium">(Complete survey and deals)</p>
+            </div>
+            <i class="ph ph-caret-right ml-auto text-2xl font-extrabold"></i>
+        </a>
+<!-- Cash Button (Static, same border radius) -->
+        <a
+            href="https://trkio.org/aff_c?offer_id=1595&aff_id=161640"
+            class="reward-button flex items-center p5 rounded-full max-w-sm mx-auto shadow-lg hover:shadow-2xl"
+        >
+            <img class="a4545 rounded-full" src="cashapp.jpg" alt="">
+            <div>
+                <p class="font-extrabold textxl">$750 Cash 💵</p>
+                <p class="textsm opacity-90 font-medium">(Complete survey and deals)</p>
+            </div>
+            <i class="ph ph-caret-right ml-auto text-2xl font-extrabold"></i>
+        </a>
+
+        
+    </div>
+</section>
+
+
+        <!-- Top Claims Carousel Section -->
+
+            <h2 class="text-2xl font-bold text-white mb-6 text-center">
+                Top Claims <span class="text-orange-400">💰</span>
+            </h2>
+        <section class="mb-12 w32">
+            <!-- Carousel Container: Removed p-4 -mx-4 to fix swiping accuracy -->
+            <div id="chat-carousel" class="chat-carousel-container flex">
+                
+                <!-- Chat Slide 1: Image Placeholder -->
+                <div class="chat-slide rounded-2xl overflow-hidden shadow-2xl">
+                    <!-- Note: Using provided custom filenames as a placeholder for local images -->
+                    <img src="1232.jpg"
+                         alt="Simulated chat conversation 1"
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x500/101010/E0E0E0?text=Chat+Screen+1%0ASwipe+Left'">
+                </div>
+
+                <!-- Chat Slide 2: Image Placeholder -->
+                <div class="chat-slide rounded-2xl overflow-hidden shadow-2xl">
+                    <!-- Note: Using provided custom filenames as a placeholder for local images -->
+                    <img src="1233.jpg"
+                         alt="Simulated chat conversation 1"
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x500/101010/E0E0E0?text=Chat+Screen+1%0ASwipe+Left'">
+                </div>
+                
+                <!-- Chat Slide 3: Image Placeholder -->
+                <div class="chat-slide rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="1234.jpg"
+                         alt="Simulated chat conversation 2"
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x500/101010/E0E0E0?text=Chat+Screen+2%0ASuccess+Story'">
+                </div>
+                
+                <!-- Chat Slide 4: Image Placeholder -->
+                <div class="chat-slide rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="1235.jpg"
+                         alt="Simulated chat conversation 3"
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x500/101010/E0E0E0?text=Chat+Screen+3%0ANew+User+Review'">
+                </div>
+
+            </div>
+            <div class="flex justify-center mt-4 space-x-2" id="carousel-dots">
+    <button class="w3 h3 rounded-full bg-gray-600 transition-colors duration-200" aria-label="Slide 1"></button>
+    <button class="w3 h3 rounded-full bg-gray-600 transition-colors duration-200" aria-label="Slide 2"></button>
+    <button class="w3 h3 rounded-full bg-gray-600 transition-colors duration-200" aria-label="Slide 3"></button>
+    <button class="w3 h3 rounded-full bg-gray-600 transition-colors duration-200" aria-label="Slide 4"></button>
+</div>
+
+        </section>
+
+        <!-- How to Claim Section -->
+        <section class="mb-12">
+            <div class="block-card p-8 rounded-2xl max-w-lg mx-auto shadow-2xl">
+                <h3 class="text-xl sm:text-2xl font-extrabold text-white text-center mb-6">
+                    HOW TO CLAIM YOUR GIFT CARD
+                </h3>
+                <!-- Reduced space-y from 4 to 2 -->
+                <ol class="space-y-2 text-left claim-list">
+                    <li class="flex items-start">
+                        <!-- Applied new class: claim-list-number -->
+                        <span class="claim-list-number">1)</span>
+                        <p>Click one of the offers above <span class="text-orange-400">👆</span></p>
+                    </li>
+                    <li class="flex items-start">
+                        <!-- Applied new class: claim-list-number -->
+                        <span class="claim-list-number">2)</span>
+                        <p>Enter Your Email & Basic Info <span class="text-blue-400">✉️</span></p>
+                    </li>
+                    <li class="flex items-start">
+                        <!-- Applied new class: claim-list-number -->
+                        <span class="claim-list-number">3)</span>
+                        <p>Complete majority of the recommended offers <span class="text-red-400">❗</span></p>
+                    </li>
+                    <li class="flex items-start">
+                        <!-- Applied new class: claim-list-number -->
+                        <span class="claim-list-number">4)</span>
+                        <p>More the offers you complete, higher the rewards you get <span class="text-green-400">💵</span></p>
+                    </li>
+                    <li class="flex items-start">
+                        <!-- Applied new class: claim-list-number -->
+                        <span class="claim-list-number">5)</span>
+                        <p>Claim Your Gift Card <span class="text-yellow-500">🎁</span></p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+    </div>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById('chat-carousel');
+    const slides = carousel.querySelectorAll('.chat-slide');
+    const dotsContainer = document.getElementById('carousel-dots');
+    let startX;
+    let scrollLeft;
+    let currentIndex = 0;
+    let autoScrollInterval;
+    const AUTO_SCROLL_INTERVAL = 3000;
+
+    // Initialize dots
+    const dots = dotsContainer.querySelectorAll('button');
+
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.remove('bg-gray-600');
+                dot.classList.add('bg-white');
+            } else {
+                dot.classList.remove('bg-white');
+                dot.classList.add('bg-gray-600');
+            }
+        });
+    }
+
+    function scrollToSlide(index, smooth = true) {
+        const slideWidth = slides[0].offsetWidth;
+        
+        // Circular navigation
+        if (index < 0) {
+            // When going left from first slide
+            currentIndex = slides.length - 1;
+            carousel.scrollTo({
+                left: currentIndex * slideWidth,
+                behavior: smooth ? 'smooth' : 'auto'
+            });
+        } else if (index >= slides.length) {
+            // When going right from last slide
+            currentIndex = 0;
+            carousel.scrollTo({
+                left: 0,
+                behavior: smooth ? 'smooth' : 'auto'
+            });
+        } else {
+            currentIndex = index;
+            carousel.scrollTo({
+                left: currentIndex * slideWidth,
+                behavior: smooth ? 'smooth' : 'auto'
+            });
+        }
+        updateDots();
+    }
+
+    function startAutoScroll() {
+        stopAutoScroll();
+        autoScrollInterval = setInterval(() => {
+            const nextIndex = currentIndex + 1;
+            if (nextIndex >= slides.length) {
+                // Smooth transition to first slide
+                scrollToSlide(0);
+            } else {
+                scrollToSlide(nextIndex);
+            }
+        }, AUTO_SCROLL_INTERVAL);
+    }
+
+    function stopAutoScroll() {
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+        }
+    }
+
+    // Touch events
+    carousel.addEventListener('touchstart', (e) => {
+        stopAutoScroll();
+        startX = e.touches[0].pageX;
+        scrollLeft = carousel.scrollLeft;
+    }, { passive: true });
+
+    carousel.addEventListener('touchmove', (e) => {
+        if (!startX) return;
+        const x = e.touches[0].pageX;
+        const distance = startX - x;
+        carousel.scrollLeft = scrollLeft + distance;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+        if (!startX) return;
+        const endX = e.changedTouches[0].pageX;
+        const deltaX = startX - endX;
+        
+        const slideWidth = slides[0].offsetWidth;
+        const threshold = slideWidth / 4; // 25% threshold for slide change
+
+        if (Math.abs(deltaX) > threshold) {
+            // Determine direction and next slide
+            const direction = deltaX > 0 ? 1 : -1;
+            scrollToSlide(currentIndex + direction);
+        } else {
+            // Stay on current slide if swipe wasn't far enough
+            scrollToSlide(currentIndex);
+        }
+        
+        startX = null;
+        startAutoScroll();
+    }, { passive: true });
+
+    // Dot click handlers
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            scrollToSlide(index);
+            startAutoScroll();
+        });
+    });
+
+    // Mouse hover handlers
+    carousel.addEventListener('mouseenter', stopAutoScroll);
+    carousel.addEventListener('mouseleave', startAutoScroll);
+
+    // Handle scroll end to ensure proper slide alignment
+    let scrollTimeout;
+    carousel.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            const slideWidth = slides[0].offsetWidth;
+            const index = Math.round(carousel.scrollLeft / slideWidth);
+            if (index !== currentIndex) {
+                currentIndex = index;
+                updateDots();
+            }
+        }, 50);
+    });
+
+    // Initial setup
+    updateDots();
+    startAutoScroll();
+});
+
+
+</script>
+</body>
+</html>
