@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Yash />} />
-        <Route path="/reward" element={<Praharsh />} />
-        <Route path="/rewards" element={<Shivam />} />
+        <Route path="/reward" element={<Shivam />} />
+        <Route path="/rewards" element={<Praharsh />} />
         <Route path="/gift" element={<Gift />} />
         <Route path="/claims" element={<Shivam />} />
         <Route path="/claim" element={<Shivam />} />
